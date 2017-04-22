@@ -1,0 +1,49 @@
+<md-subheader class="md-no-sticky">Active Alarms</md-subheader>
+<div ng-repeat="alarm in alarmList track by $index">
+
+    <md-card md-theme-watch>
+        <md-card-title>
+            <md-card-title-text ng-click="showAlarm($event,$index)" >
+                <span class="md-headline" ng-bind-html="alarm.name"></span>
+                <span class="md-subhead" ng-bind-html="alarm.desc" >Extra Small</span>
+                <span class="md-subhead" ng-bind-html="'Work for '+alarm.work + ' min and get rest for '+ alarm.rest + ' min'" >Extra Large</span>
+            </md-card-title-text>
+            <md-card-actions layout="column">
+                <md-switch ng-model="alarm.status"  ng-init="false" aria-label="Switch 1" >
+                </md-switch>
+                <md-icon class="md-secondary" ng-click="deleteAlarm($event,$index)" aria-label="Delete" md-svg-icon="../public/images/delete.svg"></md-icon>
+            </md-card-actions>
+        </md-card-title>
+    </md-card>
+</div>
+<br>
+<md-divider></md-divider>
+<md-subheader class="md-no-sticky">Archived Alarms</md-subheader>
+<md-list-item ng-repeat="alarm in archivedAlarmList " ng-click="showAlarm($event,$index,true)" class="noright">
+    <p>{{ alarm.name }}</p>
+    <md-icon class="md-secondary" ng-click="deleteForeverAlarm($event,$index)" aria-label="Delete Forever" md-svg-icon="../public/images/delete_forever.svg"></md-icon>
+</md-list-item>
+
+<md-content class="md-padding share" layout="column" >
+    <md-fab-speed-dial md-open="isOpen" md-direction="{{selectedDirection}}" ng-class="selectedMode">
+        <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-mini md-warn" md-colors="{background: '{{color}}'}" md-colors-watch="false">
+                <md-icon md-svg-src="../public/images/share.svg"></md-icon>
+            </md-button>
+        </md-fab-trigger>
+
+
+
+        <md-fab-actions>
+            <md-button aria-label="Twitter" class="md-fab md-raised md-mini" target="_blank" ng-href="https://twitter.com/intent/tweet?text={{text}}">
+                <md-icon md-svg-src="../public/images/twitter.svg" aria-label="Twitter"></md-icon>
+            </md-button>
+            <md-button aria-label="Facebook" class="md-fab md-raised md-mini" target="_blank" ng-href="https://faceboo.com/">
+                <md-icon md-svg-src="../public/images/facebook.svg" aria-label="Facebook"></md-icon>
+            </md-button>
+            <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini" >
+                <md-icon md-svg-src="../public/images/hangout.svg" aria-label="Google Hangout"></md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
+</md-content>
